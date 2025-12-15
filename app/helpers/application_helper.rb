@@ -19,6 +19,14 @@ module ApplicationHelper
   end
 
   def input_class
-    "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+    "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 text-sm"
+  end
+
+  def button_class
+    "w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-bold text-white bg-sky-500 hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 cursor-pointer transition ease-in-out duration-300"
+  end
+
+  def link_button_class
+    "font-medium text-sky-500 hover:text-sky-600 transition ease-in-out duration-300"
   end
 end
