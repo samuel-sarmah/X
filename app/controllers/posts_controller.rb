@@ -22,6 +22,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = current_user.posts.find(params[:id])
+    @post.destroy
   end
 
   private
