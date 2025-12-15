@@ -32,13 +32,13 @@ module ApplicationHelper
 
   def profile_image(user, options = {})
     size = case options[:size]
-           when "large"
+    when "large"
              "w-20 h-20"
-           when "small"
+    when "small"
              "w-10 h-10"
-           else
+    else
              "w-14 h-14"
-           end
+    end
 
     classes = "#{size} flex-shrink-0 rounded-full border-2 border-white"
 
