@@ -18,6 +18,10 @@
     </div>
 <% end %>
 
-<ul id="posts" class="divide-y mt-8">
+<div class="mb-8">
+    <%= render "form" %>
+</div>
+
+<%= turbo_frame_tag "posts", class: "divide-y list-none" do %>
     <%= render @posts %>
-</ul>
+<% end %>
