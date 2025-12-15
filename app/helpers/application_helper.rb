@@ -31,6 +31,8 @@ module ApplicationHelper
   end
 
   def profile_image(user, options = {})
+    return nil unless user
+
     size = case options[:size]
     when "large"
              "w-20 h-20"

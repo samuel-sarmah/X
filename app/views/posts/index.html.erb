@@ -25,3 +25,9 @@
 <%= turbo_frame_tag "posts", class: "divide-y list-none" do %>
     <%= render @posts %>
 <% end %>
+
+<%= turbo_frame_tag Post.new do %>
+    <% if @posts.none? %>
+        <%= render "empty" %>
+    <% end %>
+<% end %>
