@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  resources :posts, except: [ :edit, :update ]
+  resources :posts, except: [ :edit, :update ] do
+    resources :comments, only: [ :create, :destroy ]
+    member do
+      post :repost
+    end
+  end
   resources :profiles
   root "posts#index"
 
