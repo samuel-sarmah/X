@@ -2,8 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :post, optional: true # means a post can be created without another post association.
 
-  validates :body, length: { maximum: 240 }, allow_blank: true
-  validates :body, presence: true, unless: :post_id?
+  validates :body, length: { maximum: 240 }, allow_blank: false, unless: :post_id?
 
   def post_type
     if post_id? && body?
