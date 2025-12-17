@@ -33,10 +33,10 @@ class PostsController < ApplicationController
   def repost
     @post = Post.find(params[:id])
 
-    repost = current_user.posts.new(post_id: @post.id)
+    @repost = current_user.posts.new(post_id: @post.id)
 
     respond_to do |format|
-      if repost.save
+      if @repost.save
         format.turbo_stream
       else
         format.html { redirect_back fallback_location: @post, alert: "Could not repost!" }
