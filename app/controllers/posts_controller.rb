@@ -21,14 +21,32 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def destroy
     @post = current_user.posts.find(params[:id])
     @post.destroy
   end
 
+  def repost
+    @post = Post.find(params[:id])
+
+    repost = current_user.posts.new(post_id: @post.id)
+
+    respond_to do |format|
+      if repost.save
+        format.turbo_stream
+      else
+        format.html { redirect_back fallback_location: @post, alert: "Could not repost!" }
+      end
+    end
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:body)
+    params.require(:post).permit(:body, :post_id)
   end
 end
