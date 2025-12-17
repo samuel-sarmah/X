@@ -39,9 +39,9 @@
 
           <% if user_signed_in? %>
             <p class="mb-4">Signed in as <%= current_user.username %></p>
-            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: button_class(theme: "primary"), data: { turbo: false } %>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: button_class, data: { turbo: false } %>
           <% else %>
-            <%= link_to "Sign in", new_user_session_path, class: button_class(theme: "primary") %>
+            <%= link_to "Sign in", new_user_session_path, class: button_class %>
           <% end %>
         </div>
       </div>
