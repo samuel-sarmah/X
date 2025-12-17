@@ -21,7 +21,7 @@
               <span>Profile</span>
             <% end %>
           <% end %>
-
+          
           <ul class="mt-6">
             <li>
               <%= link_to root_path, class: "rounded-full px-4 -ml-4 inline-flex items-center py-3 hover:bg-neutral-50 w-full text-lg transition ease-in-out duration-500" do %>
@@ -36,6 +36,13 @@
         </div>
         <div class="lg:col-span-4 pl-6 pt-6">
           <div class="bg-gray-50 w-full min-h-[150px] rounded-lg p-6">Sidebar stuff</div>
+
+          <% if user_signed_in? %>
+            <p class="mb-4">Signed in as <%= current_user.username %></p>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: button_class(theme: "primary"), data: { turbo: false } %>
+          <% else %>
+            <%= link_to "Sign in", new_user_session_path, class: button_class(theme: "primary") %>
+          <% end %>
         </div>
       </div>
     </main>
