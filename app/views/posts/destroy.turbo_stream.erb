@@ -2,7 +2,7 @@
 
 <%# If all posts are deleted, render the empty state %>
 <% unless Post.any? %>
-    <%= turbo_stream.update Post.new do %>
+    <%= turbo_stream.update dom_id(Post.new) do %>
         <%= render "empty" %>
     <% end %>
 <% end %>
