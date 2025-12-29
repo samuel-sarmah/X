@@ -1,13 +1,13 @@
 <div class="p-6">
-    <div class="flex items-center space-x-3">
+    <div class="flex items-center space-x-3 mb-6">
         <%= link_to root_path, class: "rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-100 duration-300 tranisition-all" do %>
             <svg viewBox="0 0 24 24" aria-hidden="true" class="fill-current text-gray-800 w-5 h-5"><g><path d="M20 11H7.414l4.293-4.293c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0l-6 6c-.39.39-.39 1.023 0 1.414l6 6c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L7.414 13H20c.553 0 1-.447 1-1s-.447-1-1-1z"></path></g></svg>
         <% end %>
         <h1 class="text-2x1 font-bold">Post</h1>
     </div>
 
-    <div class="p-6">
-        <div class="flex items-start justify-between space-x-3">
+    <div class="flex items-start justify-between space-x-3">
+        <%= profile_image(@post.user) %>
             <div class="flex-1">
                 <h1 class="font-bold">
                     <%= link_to @post.user.username, profile_path(@post.user) %>
@@ -38,5 +38,18 @@
         <div class="py-2 border-y px-4 justify-center flex">
             <%= render "posts/controls", post: @post %>
         </div>
-    </div>
+
+        <% if user_signed_in? %>
+            <%= turbo_frame_tag "#{dom_id(@post)}_comment_form" do %>
+                <%= render "comments/form", post: @post %>
+            <% end %>
+        <% else %>
+            <p class="mt-6 text-center text-lg"><%= link_to "Sign in", new_user_session_path, class: "text-sky-500 hover:text-sky-600 font-medium" %> to leave a reply</p>
+        <% end %>
+
+        <div id="<%= dom_id(@post) %>_comments">
+            <% @comments.each do |comment| %>
+                <%= render "comments/comment", comment: comment %>
+            <% end %>
+        </div>
 </div>
