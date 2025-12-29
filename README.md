@@ -35,7 +35,7 @@ A social media application built with Ruby on Rails 8, featuring real-time updat
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone git@github.com:samuel-sarmah/X.git
 cd X
 ```
 
