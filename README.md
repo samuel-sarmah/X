@@ -2,6 +2,9 @@
 
 A modern social media application built with Ruby on Rails 8, featuring real-time updates with Hotwire (Turbo & Stimulus). Built to replicate the X/Twitter experience with a focus on performance and user experience.
 
+![home view](public/localhost_3000_.png)
+![profile view](public/localhost_3000_profiles_4.png)
+
 ##  Features
 
 ### Core Functionality
