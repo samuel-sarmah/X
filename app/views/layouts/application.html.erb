@@ -4,8 +4,16 @@
 
   <body class="font-sans font-normal leading-normal text-gray-800 bg-white flex flex-col min-h-screen ">
 
-    <header>
+    <header class="bg-white border-b sticky top-0 z-50">
       <%= render "shared/flash_notice" %>
+      <% if user_signed_in? %>
+        <div class="lg:hidden px-4 py-3 flex items-center justify-between">
+          <%= link_to root_path, class:"text-2xl font-black" do %>
+            <span class="text-sky-500">X</span>
+          <% end %>
+          <%= profile_image(current_user, size: "small") %>
+        </div>
+      <% end %>
     </header>
 
     <main class="flex-grow container mx-auto px-4">
@@ -34,14 +42,68 @@
         <div class="lg:col-span-6 border-x">
           <%= content_for?(:content) ? yield(:content) : yield %>
         </div>
-        <div class="lg:col-span-4 pl-6 pt-6">
-          <div class="bg-gray-50 w-full min-h-[150px] rounded-lg p-6">Sidebar stuff</div>
-
+        <div class="lg:col-span-4 pl-6 pt-6 space-y-6">
           <% if user_signed_in? %>
-            <p class="mb-4">Signed in as <%= current_user.username %></p>
-            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: button_class, data: { turbo: false } %>
+            <div class="bg-gray-50 rounded-2xl p-4">
+              <h3 class="font-bold text-lg mb-3">Trending</h3>
+              <div class="space-y-3">
+                <div class="hover:bg-gray-100 p-2 rounded-lg cursor-pointer transition-colors">
+                  <p class="text-sm text-gray-500">Trending in Technology</p>
+                  <p class="font-bold">#Rails</p>
+                  <p class="text-sm text-gray-500">1,234 posts</p>
+                </div>
+                <div class="hover:bg-gray-100 p-2 rounded-lg cursor-pointer transition-colors">
+                  <p class="text-sm text-gray-500">Trending in Web Development</p>
+                  <p class="font-bold">#Hotwire</p>
+                  <p class="text-sm text-gray-500">892 posts</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-4">
+              <h3 class="font-bold text-lg mb-3">Who to follow</h3>
+              <div class="space-y-3">
+                <% User.where.not(id: current_user.id).limit(3).each do |user| %>
+                  <div class="flex items-center justify-between hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                    <div class="flex items-center space-x-3">
+                      <%= profile_image(user, size: "small") %>
+                      <div>
+                        <p class="font-bold hover:underline cursor-pointer"><%= user.username %></p>
+                        <p class="text-sm text-gray-500">@<%= user.username %></p>
+                      </div>
+                    </div>
+                    <%= link_to "Follow", "#", class: "bg-black text-white px-4 py-1 rounded-full text-sm hover:bg-gray-800 transition-colors" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-4 bg-gray-50">
+              <div class="flex items-center space-x-3 mb-3">
+                <%= profile_image(current_user, size: "small") %>
+                <div class="flex-1">
+                  <p class="font-bold"><%= current_user.username %></p>
+                  <p class="text-sm text-gray-500">@<%= current_user.username %></p>
+                </div>
+              </div>
+              <div class="flex space-x-2 text-sm text-gray-500">
+                <span><%= current_user.posts.count %> posts</span>
+                <span>·</span>
+                <span><%= User.count - 1 %> following</span>
+                <span>·</span>
+                <span>Followers</span>
+              </div>
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "w-full mt-3 border border-gray-300 rounded-full py-2 text-sm font-medium hover:bg-gray-100 transition-colors", data: { turbo: false } %>
+            </div>
           <% else %>
-            <%= link_to "Sign in", new_user_session_path, class: button_class %>
+            <div class="bg-gray-50 rounded-2xl p-6">
+              <h2 class="text-xl font-bold mb-4">Welcome to X</h2>
+              <p class="text-gray-600 mb-6">Connect with friends and share your thoughts with the world.</p>
+              <div class="space-y-3">
+                <%= link_to "Sign in", new_user_session_path, class: "w-full bg-black text-white rounded-full py-3 text-center font-medium hover:bg-gray-800 transition-colors block" %>
+                <%= link_to "Sign up", new_user_registration_path, class: "w-full border border-gray-300 rounded-full py-3 text-center font-medium hover:bg-gray-100 transition-colors block" %>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>

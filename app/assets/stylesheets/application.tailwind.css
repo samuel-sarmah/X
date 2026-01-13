@@ -9,8 +9,6 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-@import "tailwindcss";
-
-@source "../../views/**/*.html.erb";
-@source "../../helpers/**/*.rb";
-@source "../../javascript/**/*.js";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

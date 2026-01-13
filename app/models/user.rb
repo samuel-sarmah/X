@@ -9,4 +9,8 @@ class User < ApplicationRecord
   validates_uniqueness_of :username
 
   has_one_attached :profile_image
+
+  def admin?
+    false # Override this method for admin users
+  end
 end

@@ -1,20 +1,78 @@
-<div class="p-6">
-    <div class="flex items-center justify-between">
-        <div class="flex-1 flex items-center space-x-6">
-            <%= profile_image(@profile, size: "large") %>
+<div class="border-x">
+    <!-- Cover placeholder -->
+    <div class="h-48 bg-gradient-to-r from-sky-400 to-blue-500"></div>
+    
+    <div class="px-4 pb-4">
+        <div class="flex items-start justify-between -mt-12">
+            <div class="-mt-12">
+                <%= profile_image(@profile, size: "large") %>
+            </div>
+            <div class="mt-16">
+                <% if user_signed_in? && current_user == @profile %>
+                    <%= link_to "Edit profile", edit_user_registration_path, class: "inline-flex justify-center items-center px-5 py-2 rounded-full border border-gray-300 hover:bg-gray-50 font-medium transition-colors" %>
+                <% elsif user_signed_in? && current_user != @profile %>
+                    <%= link_to "Follow", "#", class: "inline-flex justify-center items-center px-5 py-2 rounded-full bg-black text-white hover:bg-gray-800 font-medium transition-colors" %>
+                <% end %>
+            </div>        
+        </div>
+        
+        <div class="mt-4">
+            <h1 class="text-xl font-bold"><%= @profile.username %></h1>
+            <p class="text-gray-500">@<%= @profile.username %></p>
+        </div>
+        
+        <!-- Stats -->
+        <div class="flex space-x-6 mt-4 text-sm">
             <div>
-                <h1 class="font-bold text-3x1">
-                    <%= @profile.username %>
-                </h1>
-                <%= "@"+@profile.username %>
+                <span class="font-bold"><%= @profile.posts.count %></span>
+                <span class="text-gray-500">posts</span>
+            </div>
+            <div>
+                <span class="font-bold"><%= User.count - 1 %></span>
+                <span class="text-gray-500">following</span>
+            </div>
+            <div>
+                <span class="font-bold">0</span>
+                <span class="text-gray-500">followers</span>
             </div>
         </div>
-        <div>
-            <%= link_to "Edit profile", edit_user_registration_path, class: "inline-flex justify-center items-center px-5 py-2 rounded-full border ring-4 focus:ring-sky-50 ring-transparent hover:ring-sky-50 hover:border-gray-300" if current_user %>
-        </div>        
     </div>
-
-    <ul class="list-none divide-y -mx-g mt-10">
-        <%= render collection: @profile.posts, partial: "posts/post" %>
-    </ul>
+    
+    <!-- Tabs -->
+    <div class="border-y">
+        <div class="flex">
+            <button class="flex-1 py-4 hover:bg-gray-50 transition-colors relative">
+                <span class="font-bold">Posts</span>
+                <div class="absolute bottom-0 left-0 right-0 h-1 bg-sky-500"></div>
+            </button>
+            <button class="flex-1 py-4 hover:bg-gray-50 transition-colors text-gray-500">
+                <span>Replies</span>
+            </button>
+            <button class="flex-1 py-4 hover:bg-gray-50 transition-colors text-gray-500">
+                <span>Media</span>
+            </button>
+            <button class="flex-1 py-4 hover:bg-gray-50 transition-colors text-gray-500">
+                <span>Likes</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Posts -->
+    <div>
+        <% if @profile.posts.any? %>
+            <ul class="list-none divide-y">
+                <%= render collection: @profile.posts, partial: "posts/post" %>
+            </ul>
+        <% else %>
+            <div class="p-12 text-center text-gray-500">
+                <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium mb-2">No posts yet</h3>
+                <p class="text-sm">When <%= @profile.username %> posts, they'll appear here.</p>
+            </div>
+        <% end %>
+    </div>
 </div>
