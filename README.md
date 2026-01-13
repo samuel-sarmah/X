@@ -24,7 +24,7 @@ A modern social media application built with Ruby on Rails 8, featuring real-tim
 - **Who to Follow** - User discovery and suggestions
 - **Responsive Design** - Mobile-first approach with Tailwind CSS
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Backend
 - **Framework**: Ruby on Rails 8.0
@@ -113,16 +113,16 @@ app/
     └── profiles/                # Profile views
 ```
 
-## 🚀 Recent Updates (v0.0.1)
+## Recent Updates (v0.0.1)
 
 ### New Features Added
-- **✅ Like System**: Full like/unlike functionality with real-time count updates
-- **✅ Enhanced Profile Pages**: Cover images, stats, tabs, and follow buttons
-- **✅ Improved Post Form**: Sticky compose area with character counter and media buttons
-- **✅ Rich Sidebar Navigation**: Premium, Video, Communities, Bookmarks, Lists, Spaces
-- **✅ Profile Picture Upload**: Upload and save profile images with validation
-- **✅ Better UX**: Hover effects, transitions, and mobile-responsive design
-- **✅ Trending & Discovery**: Dynamic trending topics and user suggestions
+- Like System**: Full like/unlike functionality with real-time count updates
+- Enhanced Profile Pages**: Cover images, stats, tabs, and follow buttons
+- Improved Post Form**: Sticky compose area with character counter and media buttons
+- Rich Sidebar Navigation**: Premium, Video, Communities, Bookmarks, Lists, Spaces
+- Profile Picture Upload**: Upload and save profile images with validation
+- Better UX**: Hover effects, transitions, and mobile-responsive design
+- Trending & Discovery**: Dynamic trending topics and user suggestions
 
 ### Technical Improvements
 - Fixed Tailwind CSS compatibility and build issues
