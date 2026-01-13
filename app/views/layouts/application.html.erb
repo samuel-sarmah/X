@@ -95,9 +95,9 @@
           <% if user_signed_in? %>
             <div class="mt-6 mb-4">
               <%= link_to "#", class: "w-full bg-sky-500 text-white rounded-full py-3 px-4 font-medium hover:bg-sky-600 transition-colors flex items-center justify-center space-x-2" do %>
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <%# <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M19.468 3.515L12 1 4.532 3.515c-.912.303-1.532 1.158-1.532 2.121v9.728c0 .963.62 1.818 1.532 2.121L12 21l7.468-3.515c.912-.303 1.532-1.158 1.532-2.121V5.636c0-.963-.62-1.818-1.532-2.121zM12 16.5l-4.5-2.121v-6.858L12 9.5l4.5 2.121v6.858L12 16.5z"/>
-                </svg>
+                </svg> %>
                 <span>Subscribe to Premium</span>
               <% end %>
             </div>

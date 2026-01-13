@@ -2,10 +2,10 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def update_resource(resource, params)
-    if params[:profile_image].present?
-      resource.profile_image.attach(params[:profile_image])
+    if params.dig(:user, :profile_image).present?
+      resource.profile_image.attach(params[:user][:profile_image])
     end
-    resource.update_without_password(params.except(:profile_image))
+    resource.update_without_password(account_update_params.except(:profile_image))
   end
 
   def account_update_params
