@@ -1,10 +1,16 @@
-<div class="border-x sticky top-12 bg-white z-40">
-    <div class="px-4 py-3 border-b">
+<!-- Header Section -->
+<div class="border-x border-b sticky top-0 bg-white z-50">
+    <div class="px-4 py-3">
       <h1 class="text-xl font-bold">Home</h1>
     </div>
+</div>
+
+<!-- Post Form Section -->
+<div class="border-x border-b bg-white relative" style="z-index: 40;">
     <%= render "form", post: @post %>
 </div>
 
+<!-- Posts Feed -->
 <%= turbo_frame_tag "posts", class: "divide-y list-none" do %>
     <% @posts.each do |post| %>
         <%= render partial: "posts/#{post.post_type}", locals: { post: post } %>

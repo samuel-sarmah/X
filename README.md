@@ -1,28 +1,50 @@
 # X - A Twitter/X Clone
 
-A social media application built with Ruby on Rails 8, featuring real-time updates with Hotwire (Turbo & Stimulus).
+A modern social media application built with Ruby on Rails 8, featuring real-time updates with Hotwire (Turbo & Stimulus). Built to replicate the X/Twitter experience with a focus on performance and user experience.
 
-## Features
+##  Features
 
+### Core Functionality
 - **User Authentication** - Sign up, sign in, and manage sessions with Devise
-- **Posts** - Create, view, and delete posts
-- **Reposts** - Repost content from other users
-- **Comments** - Reply to posts with real-time updates
-- **User Profiles** - View user profiles with profile images (Active Storage)
+- **Posts & Tweets** - Create, view, and delete posts with 240 character limit
 - **Real-time Updates** - Turbo Streams for instant UI updates without page reloads
+- **Interactive Likes** - Like/unlike posts with live count updates
+- **Reposts** - Share content from other users with one click
+- **Comments** - Reply to posts with real-time updates
 
-## Tech Stack
+### Enhanced Features
+- **Profile Management** - Upload and change profile pictures with validation
+- **Character Counter** - Real-time character counting with visual warnings
+- **Sticky Post Form** - Persistent compose area with expand/collapse functionality
+- **Rich Sidebar** - Navigation with Premium, Video, Communities, Bookmarks, Lists, Spaces
+- **Trending Topics** - Dynamic trending content display
+- **Who to Follow** - User discovery and suggestions
+- **Responsive Design** - Mobile-first approach with Tailwind CSS
 
+## 🛠 Tech Stack
+
+### Backend
 - **Framework**: Ruby on Rails 8.0
-- **Database**: PostgreSQL
-- **Frontend**: Hotwire (Turbo + Stimulus), Tailwind CSS
-- **Authentication**: Devise
-- **Asset Pipeline**: Propshaft, jsbundling-rails
-- **File Storage**: Active Storage
+- **Database**: PostgreSQL with foreign key constraints
+- **Authentication**: Devise with custom registrations controller
+- **File Storage**: Active Storage with image validation
 - **Background Jobs**: Solid Queue
 - **Caching**: Solid Cache
-- **WebSockets**: Solid Cable
+- **Real-time**: Turbo Streams & Solid Cable
+
+### Frontend
+- **JavaScript**: Hotwire (Turbo + Stimulus) for SPA-like experience
+- **Styling**: Tailwind CSS v3 with custom components
+- **Asset Pipeline**: Propshaft + jsbundling-rails (esbuild)
+- **Icons**: Heroicons SVG components
+- **Interactivity**: Custom Stimulus controllers
+
+### Development & Deployment
+- **Testing**: Minitest with integration and model tests
+- **Code Quality**: RuboCop Rails Omakase
+- **Security**: Brakeman scanning
 - **Deployment**: Kamal (Docker-based)
+- **Process Management**: Puma web server
 
 ## Requirements
 
@@ -88,6 +110,24 @@ app/
     └── profiles/                # Profile views
 ```
 
+## 🚀 Recent Updates (v0.0.1)
+
+### New Features Added
+- **✅ Like System**: Full like/unlike functionality with real-time count updates
+- **✅ Enhanced Profile Pages**: Cover images, stats, tabs, and follow buttons
+- **✅ Improved Post Form**: Sticky compose area with character counter and media buttons
+- **✅ Rich Sidebar Navigation**: Premium, Video, Communities, Bookmarks, Lists, Spaces
+- **✅ Profile Picture Upload**: Upload and save profile images with validation
+- **✅ Better UX**: Hover effects, transitions, and mobile-responsive design
+- **✅ Trending & Discovery**: Dynamic trending topics and user suggestions
+
+### Technical Improvements
+- Fixed Tailwind CSS compatibility and build issues
+- Added proper database constraints and validations
+- Implemented comprehensive error handling
+- Enhanced accessibility with proper ARIA labels
+- Improved performance with optimized database queries
+
 ## API Routes
 
 | Method | Path | Description |
@@ -97,6 +137,8 @@ app/
 | GET | `/posts/:id` | View a single post with comments |
 | DELETE | `/posts/:id` | Delete a post |
 | POST | `/posts/:id/repost` | Repost a post |
+| POST | `/posts/:post_id/likes` | Like a post |
+| DELETE | `/posts/:post_id/likes/:id` | Unlike a post |
 | POST | `/posts/:post_id/comments` | Add a comment |
 | DELETE | `/posts/:post_id/comments/:id` | Delete a comment |
 | GET | `/profiles/:id` | View a user profile |

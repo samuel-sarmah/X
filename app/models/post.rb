@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   belongs_to :post, optional: true # means a post can be created without another post association.
 
   validates :body, length: { maximum: 240 }, allow_blank: true

@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "input", "counter" ]
+  static targets = [ "input", "counter", "submitButton" ]
   static values = { 
     maxLength: Number,
     warningLength: { type: Number, default: 200 }
@@ -27,14 +27,18 @@ export default class extends Controller {
     }
     
     // Enable/disable submit button
-    const submitButton = this.element.querySelector('input[type="submit"]')
-    if (submitButton) {
-      submitButton.disabled = remaining < 0
-      if (remaining < 0) {
-        submitButton.className = 'px-6 py-2 bg-gray-300 text-gray-500 font-semibold rounded-full text-center cursor-not-allowed inline-block'
-      } else {
-        submitButton.className = 'px-6 py-2 bg-sky-400 text-white font-semibold rounded-full text-center cursor-pointer inline-block hover:bg-sky-500 transition ease-in-out duration-300'
-      }
+    if (this.submitButtonTarget) {
+      this.submitButtonTarget.disabled = remaining < 0 || currentLength === 0
+    }
+  }
+
+  expandTextArea() {
+    this.inputTarget.rows = 6
+  }
+
+  collapseTextArea() {
+    if (this.inputTarget.value.length === 0) {
+      this.inputTarget.rows = 2
     }
   }
 }
